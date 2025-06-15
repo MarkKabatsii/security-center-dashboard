@@ -141,10 +141,10 @@ export interface AlertConfiguration {
  */
 // UA: Інтерфейс для додаткових налаштувань системи.
 // EN: Interface for additional system settings.
+
 export interface AdditionalSettings {
     systemLanguage: string;
     timezone: string;
-    maxLogRetentionDays: number;
 }
 
 /**
@@ -158,8 +158,9 @@ export interface AdditionalSettings {
 // EN: Interface for overall settings data structure.
 export interface SettingsData {
     apiKeys: ApiKeys;
-    alertConfig: AlertConfiguration;
+    alertConfig: AlertConfig;
     additionalSettings: AdditionalSettings;
+    // Add any other top-level properties your settings object might have
 }
 
 /**
@@ -170,7 +171,6 @@ export interface SettingsData {
 // UA: Тип для статусу проксі-сервісу.
 // EN: Type for proxy service status.
 export type ProxyServiceStatus = 'ON' | 'OFF';
-
 /**
  * @interface PaginatedResponse
  * @description Generic interface for a paginated API response.
