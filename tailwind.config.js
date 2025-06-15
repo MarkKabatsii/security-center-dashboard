@@ -20,7 +20,9 @@ export default {
           error: '#D32F2F',
           success: '#388E3C',
           border: '#e0e0e0',
-          warning: '#FBC02D', // Світло-оранжевий для світлої теми
+          warning: '#FBC02D',
+          focus: '#d3e3fd',
+          hover: '#e2e4e8',
         },
         // Темна тема
         dark: {
@@ -34,18 +36,10 @@ export default {
           border: '#2C2C2C',
           warning: '#FFEB3B', // Жовтий для темної теми
         },
-        // Ви також можете визначити основні кольори, які будуть застосовуватися
-        // як у світлій, так і в темній темі, якщо вони не змінюються,
-        // або перевизначити стандартні кольори Tailwind.
-        // Наприклад, ви можете переробити 'blue'
-        blue: {
-          '500': '#4FC3F7', // Варіант 1 (можна використати як 'blue-500')
-          '400': '#90CAF9', // Варіант 2 (можна використати як 'blue-400')
-        }
       },
       // Додайте тут налаштування шрифтів, якщо вони ще не були додані
       fontFamily: {
-        sans: ['Roboto', ...require('tailwindcss/defaultTheme').fontFamily.sans],
+        sans: ['Poppins', ...require('tailwindcss/defaultTheme').fontFamily.sans],
       },
     },
   },

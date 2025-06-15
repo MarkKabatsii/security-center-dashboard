@@ -10,8 +10,6 @@ import classNames from 'classnames';
  * @property {string} [className] - Additional CSS classes for the input element.
  * @property {string} [labelClassName] - Additional CSS classes for the label element.
  */
-// UA: Властивості компонента Input. Розширює стандартні атрибути HTML input.
-// EN: Props for the Input component. Extends standard HTML input attributes.
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     label?: string;
     error?: string;
@@ -24,16 +22,18 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @description A customizable input field component with optional label and error display.
  * @param {InputProps} props - The component's props.
  */
-// UA: Компонент поля вводу, що налаштовується, з опціональною міткою та відображенням помилок.
-// EN: A customizable input field component with optional label and error display.
 const Input: React.FC<InputProps> = ({ label, error, className, labelClassName, ...rest }) => {
     const inputClasses = classNames(
         'block w-full px-3 py-2 border rounded-md shadow-sm',
-        'focus:outline-none focus:ring-indigo-500 focus:border-indigo-500',
-        'bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600',
+        // Використовуємо ваші кастомні кольори для фокусу
+        'focus:outline-none focus:ring-2 focus:ring-light-accent dark:focus:ring-dark-accent',
+        'focus:border-light-accent dark:focus:border-dark-accent', // Додано для відповідності фокусу
+        // Використовуємо ваші кастомні кольори для фону, тексту та бордера
+        'bg-light-surface text-light-text',
+        'dark:bg-dark-surface dark:text-dark-text',
         {
-            'border-gray-300 dark:border-gray-600': !error,
-            'border-red-500 dark:border-red-500': error,
+            'border-light-border dark:border-dark-border': !error, // Бордер без помилки
+            'border-light-error dark:border-dark-error': error,    // Бордер при помилці
         },
         className
     );
@@ -41,7 +41,14 @@ const Input: React.FC<InputProps> = ({ label, error, className, labelClassName, 
     return (
         <div className="mb-4">
             {label && (
-                <label htmlFor={rest.id} className={classNames('block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1', labelClassName)}>
+                <label
+                    htmlFor={rest.id}
+                    className={classNames(
+                        // Використовуємо ваші кастомні кольори для лейбла (можливо, text або muted)
+                        'block text-sm font-medium text-light-muted dark:text-dark-muted mb-1',
+                        labelClassName
+                    )}
+                >
                     {label}
                 </label>
             )}
@@ -50,7 +57,7 @@ const Input: React.FC<InputProps> = ({ label, error, className, labelClassName, 
                 {...rest}
             />
             {error && (
-                <p className="mt-1 text-sm text-red-600 dark:text-red-400">
+                <p className="mt-1 text-sm text-light-error dark:text-dark-error">
                     {error}
                 </p>
             )}
