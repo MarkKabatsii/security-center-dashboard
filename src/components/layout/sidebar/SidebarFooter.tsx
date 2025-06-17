@@ -1,4 +1,3 @@
-// src/components/layout/sidebar/SidebarFooter.tsx
 import React from 'react';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
@@ -34,12 +33,12 @@ const SidebarFooter: React.FC<SidebarFooterProps> = ({
                 className={classNames(
                     "flex items-center py-2 text-sm font-normal transition-colors duration-200 whitespace-nowrap overflow-hidden" +
                     "flex items-center w-full text-left py-2 rounded-full text-sm font-normal transition-colors duration-200 whitespace-nowrap overflow-hidden",
-                    "px-6", // Фіксований padding-x
+                    "px-6",
                     {
                         "text-light-muted dark:text-dark-muted hover:bg-light-accent hover:text-light-text dark:hover:bg-dark-bg dark:hover:text-dark-text": true,
-                        // Ширина кнопки коли сайдбар розгорнутий (повна ширина мінус 16px з кожного боку)
-                        "w-100%": isSidebarOpen, // 100% - (pl-4 + pr-2 батьківського Aside) = 100% - 24px
-                        // ml-3 (12px) щоб вирівняти з кнопкою New Chat
+                        // The width of the button when the sidebar is expanded (full width minus 16px on each side)
+                        "w-100%": isSidebarOpen, // 100% - (pl-4 + pr-2 parent Aside) = 100% - 24px
+                        // ml-3 (12px) to align with the button New Chat
                     }
                 )}
                 data-tooltip-id={tooltipId}
@@ -48,7 +47,7 @@ const SidebarFooter: React.FC<SidebarFooterProps> = ({
                 data-tooltip-delay-show={0}
                 data-tooltip-delay-hide={0}
             >
-                {/* Обгортка для іконки: ЗАВЖДИ ОДНАКОВЕ ПОЛОЖЕННЯ */}
+                {/* Icon Wrapper: ALWAYS THE SAME POSITION */}
                 <div className="flex-shrink-0 flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"
@@ -58,10 +57,10 @@ const SidebarFooter: React.FC<SidebarFooterProps> = ({
                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
                     </svg>
                 </div>
-                {/* Текст: плавне зникнення/поява */}
+                {/* Text: fade in/out */}
                 <span className={classNames("flex-1 ml-3", { // ml-3 для відступу від іконки
                     "opacity-100 transition-opacity duration-200": isSidebarOpen,
-                    "opacity-0": !isSidebarOpen // При згортанні текст зникає
+                    "opacity-0": !isSidebarOpen // Text disappears when collapsed
                 })}>
                     Logout
                 </span>

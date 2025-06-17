@@ -1,11 +1,10 @@
-// src/pages/RuleManagement.tsx
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import Card from '../../components/ui/Card.tsx';
 import Button from '../../components/ui/Button.tsx';
-import Table, {type TableColumn } from '../../components/ui/Table.tsx';
+import Table, {type TableColumn} from '../../components/ui/Table.tsx';
 import Modal from '../../components/ui/Modal.tsx';
 import Input from '../../components/ui/Input.tsx';
-import { useData } from '../../contexts/DataContext.tsx';
+import {useData} from '../../contexts/DataContext.tsx';
 import type {Rule} from '../../types';
 
 /**
@@ -13,16 +12,14 @@ import type {Rule} from '../../types';
  * @description Page for managing security rules.
  * Allows viewing, adding, editing, and deleting rules through a table and modal forms.
  */
-// UA: Сторінка для управління правилами безпеки.
-// Дозволяє переглядати, додавати, редагувати та видаляти правила через таблицю та модальні форми.
-// EN: Page for managing security rules.
+// Page for managing security rules.
 // Allows viewing, adding, editing, and deleting rules through a table and modal forms.
 const RuleManagement: React.FC = () => {
-    const { rules, totalRules, isLoading, error, fetchRules, addRule, updateRule, deleteRule } = useData();
+    const {rules, totalRules, isLoading, error, fetchRules, addRule, updateRule, deleteRule} = useData();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingRule, setEditingRule] = useState<Rule | null>(null);
-    const [ruleForm, setRuleForm] = useState<Omit<Rule, 'id'>>({ name: '', type: '', action: 'Block', enabled: true });
+    const [ruleForm, setRuleForm] = useState<Omit<Rule, 'id'>>({name: '', type: '', action: 'Block', enabled: true});
     const [formErrors, setFormErrors] = useState<{ name?: string; type?: string }>({});
 
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -30,18 +27,17 @@ const RuleManagement: React.FC = () => {
 
     // Fetch rules when pagination changes
     useEffect(() => {
-        fetchRules({ page: currentPage, limit: itemsPerPage });
+        fetchRules({page: currentPage, limit: itemsPerPage});
     }, [currentPage, itemsPerPage, fetchRules]);
 
     /**
      * @function handleAddRuleClick
      * @description Opens the modal for adding a new rule.
      */
-        // UA: Відкриває модальне вікно для додавання нового правила.
-        // EN: Opens the modal for adding a new rule.
+        // Opens the modal for adding a new rule.
     const handleAddRuleClick = () => {
             setEditingRule(null);
-            setRuleForm({ name: '', type: '', action: 'Block', enabled: true });
+            setRuleForm({name: '', type: '', action: 'Block', enabled: true});
             setFormErrors({});
             setIsModalOpen(true);
         };
@@ -51,11 +47,10 @@ const RuleManagement: React.FC = () => {
      * @description Opens the modal for editing an existing rule, pre-filling the form.
      * @param {Rule} rule - The rule object to be edited.
      */
-        // UA: Відкриває модальне вікно для редагування існуючого правила, попередньо заповнюючи форму.
-        // EN: Opens the modal for editing an existing rule, pre-filling the form.
+        // Opens the modal for editing an existing rule, pre-filling the form.
     const handleEditRuleClick = (rule: Rule) => {
             setEditingRule(rule);
-            setRuleForm({ name: rule.name, type: rule.type, action: rule.action, enabled: rule.enabled });
+            setRuleForm({name: rule.name, type: rule.type, action: rule.action, enabled: rule.enabled});
             setFormErrors({});
             setIsModalOpen(true);
         };
@@ -65,8 +60,7 @@ const RuleManagement: React.FC = () => {
      * @description Handles the deletion of a rule after user confirmation.
      * @param {string} id - The ID of the rule to delete.
      */
-        // UA: Обробляє видалення правила після підтвердження користувача.
-        // EN: Handles the deletion of a rule after user confirmation.
+        // Handles the deletion of a rule after user confirmation.
     const handleDeleteRuleClick = async (id: string) => {
             if (window.confirm('Are you sure you want to delete this rule?')) {
                 await deleteRule(id);
@@ -78,12 +72,11 @@ const RuleManagement: React.FC = () => {
      * @description Updates the form state as the user types.
      * @param {React.ChangeEvent<HTMLInputElement | HTMLSelectElement>} e - The change event.
      */
-        // UA: Оновлює стан форми під час введення користувача.
-        // EN: Updates the form state as the user types.
+        // Updates the form state as the user types.
     const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-            const { name, value } = e.target;
-            setRuleForm(prev => ({ ...prev, [name]: value }));
-            setFormErrors(prev => ({ ...prev, [name]: undefined })); // Clear error on change
+            const {name, value} = e.target;
+            setRuleForm(prev => ({...prev, [name]: value}));
+            setFormErrors(prev => ({...prev, [name]: undefined})); // Clear error on change
         };
 
     /**
@@ -91,8 +84,7 @@ const RuleManagement: React.FC = () => {
      * @description Validates the rule form fields.
      * @returns {boolean} True if the form is valid, false otherwise.
      */
-        // UA: Валідує поля форми правила.
-        // EN: Validates the rule form fields.
+        // Validates the rule form fields.
     const validateForm = () => {
             const errors: { name?: string; type?: string } = {};
             if (!ruleForm.name.trim()) {
@@ -110,8 +102,7 @@ const RuleManagement: React.FC = () => {
      * @description Handles form submission for adding or updating a rule.
      * @param {React.FormEvent} e - The form submission event.
      */
-        // UA: Обробляє відправку форми для додавання або оновлення правила.
-        // EN: Handles form submission for adding or updating a rule.
+        // Handles form submission for adding or updating a rule.
     const handleSubmit = async (e: React.FormEvent) => {
             e.preventDefault();
             if (!validateForm()) {
@@ -119,7 +110,7 @@ const RuleManagement: React.FC = () => {
             }
 
             if (editingRule) {
-                await updateRule({ ...editingRule, ...ruleForm });
+                await updateRule({...editingRule, ...ruleForm});
             } else {
                 await addRule(ruleForm);
             }
@@ -194,7 +185,8 @@ const RuleManagement: React.FC = () => {
                 </div>
             </Card>
 
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title={editingRule ? 'Edit Rule' : 'Add New Rule'}>
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}
+                   title={editingRule ? 'Edit Rule' : 'Add New Rule'}>
                 <form onSubmit={handleSubmit}>
                     <Input
                         label="Rule Name"
@@ -215,7 +207,8 @@ const RuleManagement: React.FC = () => {
                         required
                     />
                     <div className="mb-4">
-                        <label htmlFor="action" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        <label htmlFor="action"
+                               className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                             Action
                         </label>
                         <select

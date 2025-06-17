@@ -1,4 +1,3 @@
-// src/pages/UserManagement.tsx
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/ui/Card.tsx';
 import Button from '../../components/ui/Button.tsx';
@@ -14,9 +13,7 @@ import type {User} from '../../types';
  * @description Page for managing system users.
  * Allows viewing, adding, editing, and deleting users through a table and modal forms.
  */
-// UA: Сторінка для управління користувачами системи.
-// Дозволяє переглядати, додавати, редагувати та видаляти користувачів через таблицю та модальні форми.
-// EN: Page for managing system users.
+// Page for managing system users.
 // Allows viewing, adding, editing, and deleting users through a table and modal forms.
 const UserManagement: React.FC = () => {
     const { users, totalUsers, isLoading, error, fetchUsers, addUser, updateUser, deleteUser } = useData();
@@ -38,8 +35,7 @@ const UserManagement: React.FC = () => {
      * @function handleAddUserClick
      * @description Opens the modal for adding a new user.
      */
-        // UA: Відкриває модальне вікно для додавання нового користувача.
-        // EN: Opens the modal for adding a new user.
+        // Opens the modal for adding a new user.
     const handleAddUserClick = () => {
             setEditingUser(null);
             setUserForm({ name: '', email: '', role: 'User', status: 'Active' });
@@ -52,8 +48,7 @@ const UserManagement: React.FC = () => {
      * @description Opens the modal for editing an existing user, pre-filling the form.
      * @param {User} user - The user object to be edited.
      */
-        // UA: Відкриває модальне вікно для редагування існуючого користувача, попередньо заповнюючи форму.
-        // EN: Opens the modal for editing an existing user, pre-filling the form.
+        // Opens the modal for editing an existing user, pre-filling the form.
     const handleEditUserClick = (user: User) => {
             setEditingUser(user);
             setUserForm({ name: user.name, email: user.email, role: user.role, status: user.status });
@@ -66,8 +61,7 @@ const UserManagement: React.FC = () => {
      * @description Handles the deletion of a user after user confirmation.
      * @param {string} id - The ID of the user to delete.
      */
-        // UA: Обробляє видалення користувача після підтвердження користувача.
-        // EN: Handles the deletion of a user after user confirmation.
+        // Handles the deletion of a user after user confirmation.
     const handleDeleteUserClick = async (id: string) => {
             if (window.confirm('Are you sure you want to delete this user?')) {
                 await deleteUser(id);
@@ -79,8 +73,7 @@ const UserManagement: React.FC = () => {
      * @description Updates the form state as the user types.
      * @param {React.ChangeEvent<HTMLInputElement | HTMLSelectElement>} e - The change event.
      */
-        // UA: Оновлює стан форми під час введення користувача.
-        // EN: Updates the form state as the user types.
+        // Updates the form state as the user types.
     const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
             const { name, value } = e.target;
             setUserForm(prev => ({ ...prev, [name]: value }));
@@ -92,8 +85,7 @@ const UserManagement: React.FC = () => {
      * @description Validates the user form fields.
      * @returns {boolean} True if the form is valid, false otherwise.
      */
-        // UA: Валідує поля форми користувача.
-        // EN: Validates the user form fields.
+        // Validates the user form fields.
     const validateForm = () => {
             const errors: { name?: string; email?: string } = {};
             if (!userForm.name.trim()) {
@@ -113,14 +105,12 @@ const UserManagement: React.FC = () => {
      * @description Handles form submission for adding or updating a user.
      * @param {React.FormEvent} e - The form submission event.
      */
-        // UA: Обробляє відправку форми для додавання або оновлення користувача.
-        // EN: Handles form submission for adding or updating a user.
+        // Handles form submission for adding or updating a user.
     const handleSubmit = async (e: React.FormEvent) => {
             e.preventDefault();
             if (!validateForm()) {
                 return;
             }
-
             if (editingUser) {
                 await updateUser({ ...editingUser, ...userForm });
             } else {
@@ -135,8 +125,7 @@ const UserManagement: React.FC = () => {
      * @param {User['status']} status - The status of the user.
      * @returns {'success' | 'danger' | 'warning' | 'info' | 'default'} The badge variant.
      */
-        // UA: Повертає відповідний варіант бейджа для статусу користувача.
-        // EN: Returns the appropriate badge variant for a user status.
+        // Returns the appropriate badge variant for a user status.
     const getStatusBadgeVariant = (status: User['status']) => {
             switch (status) {
                 case 'Active':

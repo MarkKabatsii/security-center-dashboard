@@ -1,4 +1,3 @@
-// src/components/layout/sidebar/MainNavigation.tsx
 import React from 'react';
 import SidebarLink from './SidebarLink';
 

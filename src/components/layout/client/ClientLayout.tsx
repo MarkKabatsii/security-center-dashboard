@@ -1,4 +1,3 @@
-// src/components/layout/ClientLayout.tsx
 import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import ClientNavbar from './ClientNavbar.tsx';
@@ -14,32 +13,32 @@ interface ClientLayoutProps {
 const ClientLayout: React.FC<ClientLayoutProps> = ({ toggleTheme, isDarkMode }) => {
     const isDesktop = useIsDesktop();
 
-    // isSidebarOpen: true = розгорнутий, false = згорнутий до іконок
+    // isSidebarOpen: true = open, false = closed
     const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
-        // За замовчуванням, якщо на десктопі, сайдбар має бути відкритий.
-        // Перевіряємо localStorage тільки якщо користувач його згорнув.
+        // By default, if on a desktop, the sidebar should be open.
+        // We only check localStorage if the user has minimized it.
         if (typeof window !== 'undefined' && window.innerWidth >= 768) { // Перевірка window.innerWidth на початковому рендері
             const savedState = localStorage.getItem('isSidebarOpen');
-            // Якщо є збережений стан, використовуємо його. Якщо немає, або він false,
-            // а ми на десктопі, то за замовчуванням відкриваємо (true).
+            // If there is a saved state, we use it. If there is not, or it is false,
+            // and we are on the desktop, then by default we open (true).
             return savedState ? JSON.parse(savedState) : true;
         }
-        return false; // За замовчуванням згорнутий на мобільних
+        return false; // Collapsed by default on mobile
     });
 
-    // Ефект для адаптації сайдбару при зміні розміру вікна
+    // Sidebar adaptation effect when resizing the window
     useEffect(() => {
         if (isDesktop) {
-            // Якщо переходимо на десктоп:
-            // Відновлюємо стан сайдбару з localStorage або встановлюємо true (розгорнутий)
+            // If we switch to the desktop:
+            // Restore the sidebar state from localStorage or set to true (expanded)
             const savedState = localStorage.getItem('isSidebarOpen');
             setIsSidebarOpen(savedState ? JSON.parse(savedState) : true);
         } else {
-            // Якщо переходимо на мобільний:
-            // Сайдбар завжди повністю прихований (false)
+            // If we switch to mobile:
+            // Sidebar is always completely hidden (false)
             setIsSidebarOpen(false);
         }
-    }, [isDesktop]); // Залежить від isDesktop
+    }, [isDesktop]); // Depends on isDesktop
 
     const toggleSidebar = () => {
         setIsSidebarOpen((prev: boolean) => {
@@ -47,8 +46,8 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ toggleTheme, isDarkMode }) 
             if (isDesktop) { // Зберігаємо стан лише для десктопів
                 localStorage.setItem('isSidebarOpen', JSON.stringify(newState));
             }
-            // На мобільних (коли !isDesktop), toggleSidebar просто відкриває/закриває його,
-            // localStorage для них не використовується.
+            // On mobile (when !isDesktop), toggle Sidebar simply opens/closes it,
+            // localStorage is not used for them.
             return newState;
         });
     };

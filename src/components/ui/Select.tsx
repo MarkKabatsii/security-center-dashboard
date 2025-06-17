@@ -1,10 +1,9 @@
-// src/components/ui/Select.tsx
 import React from 'react';
 import classNames from 'classnames';
 
 interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
     options: { value: string; label: string }[];
-    // Можливо, додати варіанти для помилок, розмірів тощо
+    // Maybe add options for errors, sizes, etc.
 }
 
 const Select: React.FC<SelectProps> = ({ options, className, ...props }) => {
@@ -12,9 +11,9 @@ const Select: React.FC<SelectProps> = ({ options, className, ...props }) => {
     const themeStyles = 'bg-light-surface text-light-text border-light-border ' +
         'dark:bg-dark-surface dark:text-dark-text dark:border-dark-border ' +
         'focus:ring-2 focus:ring-light-accent dark:focus:ring-dark-accent';
-    // Додаємо стиль для стрілочки
+    // Adding a style for the arrow
     const arrowStyles = 'bg-no-repeat bg-[right_0.75rem_center] bg-[length:16px_12px] ' +
-        'bg-chevron-down dark:bg-chevron-down-dark'; // Потрібно визначити іконки в Tailwind config
+        'bg-chevron-down dark:bg-chevron-down-dark'; // Need to define icons in Tailwind config
 
     return (
         <div className="relative">
@@ -28,7 +27,7 @@ const Select: React.FC<SelectProps> = ({ options, className, ...props }) => {
                     </option>
                 ))}
             </select>
-            {/* Можна додати кастомну іконку стрілочки, якщо "appearance-none" не спрацює красиво */}
+            {/* You can add a custom arrow icon if "appearance-none" doesn't work nicely. */}
         </div>
     );
 };

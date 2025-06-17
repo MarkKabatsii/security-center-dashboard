@@ -1,5 +1,3 @@
-// src/data/historyData.ts
-
 export interface HistoryEntry {
     id: string;
     timestamp: string; // ISO string or similar for easy sorting/display

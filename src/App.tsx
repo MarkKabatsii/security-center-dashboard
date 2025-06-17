@@ -1,9 +1,8 @@
-// src/App.tsx
-import React, {useState, Suspense} from 'react'; // Додано useState
+import React, {useState, Suspense} from 'react';
 import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
 import ClientLayout from './components/layout/client/ClientLayout.tsx';
 import {DataProvider} from "./contexts/DataContext.tsx";
-// Використовуємо React.lazy для "лінивого" завантаження сторінок
+
 const HomePage = React.lazy(() => import('./pages/client/HomePage'));
 const HistoryPage = React.lazy(() => import('./pages/client/HistoryPage'));
 const SettingsPage = React.lazy(() => import('./pages/client/SettingsPage'));
@@ -18,11 +17,9 @@ const AdminLayout = React.lazy(() => import('./components/layout/admin/AdminLayo
 
 
 const App: React.FC = () => {
-    // Додайте стан для теми, якщо ClientLayout його очікує
-    // Якщо ClientLayout має власну логіку керування темою, цей стан може бути непотрібним тут
     const [isDarkMode, setIsDarkMode] = useState(false);
 
-    // Функція для перемикання теми, якщо вона передається до ClientLayout
+    // Function to switch theme if passed to ClientLayout
     const toggleTheme = () => {
         setIsDarkMode(prevMode => !prevMode);
         document.documentElement.classList.toggle('dark', !isDarkMode);
@@ -30,16 +27,15 @@ const App: React.FC = () => {
 
     return (
         <Router>
-            {/* Suspense обгортає маршрути, які можуть бути ліниво завантажені */}
             <Suspense fallback={
                 <div
                     className="flex items-center justify-center min-h-screen bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text">
-                    <p>Loading...</p> {/* Або спінер, скелетон-лоадер */}
+                    <p>Loading...</p> {/* Or a spinner, a skeleton loader */}
                 </div>
             }>
                 <Routes>
-                    {/* Маршрути для клієнтської частини */}
-                    {/* Передаємо toggleTheme та isDarkMode до ClientLayout, якщо вони там потрібні */}
+                    {/* Routes for the client side */}
+                    {/* Pass toggleTheme and isDarkMode to ClientLayout if they are needed there */}
                     <Route path="/" element={
                         <DataProvider>
                             <ClientLayout toggleTheme={toggleTheme} isDarkMode={isDarkMode}/>
@@ -47,19 +43,19 @@ const App: React.FC = () => {
                     }>
                         <Route index element={<HomePage/>}/>
                         <Route path="history" element={<HistoryPage/>}/>
-                        {/* Змінено маршрути для ResponseViewPage, щоб дозволити ID */}
-                        {/* Цей маршрут для нових відповідей (без ID) */}
+                        {/* Changed routes for ResponseViewPage to allow ID */}
+                        {/* This route is for new replies (without ID) */}
                         <Route path="response-view" element={<ResponseViewPage/>}/>
-                        {/* Цей маршрут для перегляду відповідей з історії (з ID) */}
+                        {/* This route is for viewing replies from history (with ID) */}
                         <Route path="response-view/:id" element={<ResponseViewPage/>}/>
 
                         <Route path="settings" element={<SettingsPage/>}/>
                         <Route path="blocked" element={<ErrorBlockedPage/>}/>
-                        {/* Маршрут для перенаправлення невідомих шляхів на головну сторінку клієнта */}
+                        {/* Route to redirect unknown paths to the client's home page */}
                         <Route path="*" element={<Navigate to="/" replace/>}/>
                     </Route>
 
-                    {/* Приклад маршрутів для адмін-панелі (закоментовано, як у вашому прикладі) */}
+                    {/* Example routes for the admin panel (commented, like in your example) */}
                     <Route path="/admin" element={
                         <DataProvider>
                             <AdminLayout toggleTheme={toggleTheme} isDarkMode={isDarkMode}/>

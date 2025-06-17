@@ -1,9 +1,7 @@
-// src/services/api.ts
-
 import type { LogEntry, Rule, User, StatisticCard, RecentEvent, SettingsData, ProxyServiceStatus, PaginatedResponse, SystemEvent } from "../types";
 
-// Закоментовано, оскільки бекенд не реалізований.
-// Це функція, яка буде використовуватись для реальних HTTP-запитів до бекенду.
+// Commented out because the backend is not implemented.
+// This is the function that will be used for actual HTTP requests to the backend.
 /*
 type ApiResponse<T> = T;
 
@@ -52,7 +50,7 @@ function buildQuery(params?: Record<string, string | number | boolean | undefine
 }
 */
 
-// --- Мокові дані для використання без бекенду ---
+// --- Mock data for use without a backend ---
 const mockProxyServiceStatus: ProxyServiceStatus = 'ON';
 const mockStatistics: StatisticCard[] = [
     { title: 'Total Requests', value: 25432 },
@@ -92,7 +90,7 @@ const mockSystemEvents: SystemEvent[] = [
     { id: 'e2', timestamp: '2025-06-08T11:00:00Z', category: 'Security', description: 'Unauthorized access attempt' },
 ];
 
-// Імітація затримки мережі
+// Network latency simulation
 const simulateNetworkDelay = (ms: number = 300) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const apiService = {
@@ -108,8 +106,8 @@ export const apiService = {
         // const newStatus = await fetchJson<ProxyServiceStatus>('/api/proxy/toggle', { method: 'POST' });
         // return newStatus;
         await simulateNetworkDelay();
-        // У реальному житті тут буде зміна статусу
-        const currentStatus = mockProxyServiceStatus === 'ON' ? 'OFF' : 'ON'; // Це тимчасово, для імітації
+        // In real life, there will be a change in status here
+        const currentStatus = mockProxyServiceStatus === 'ON' ? 'OFF' : 'ON'; // This is temporary, for imitation.
         return Promise.resolve(currentStatus);
     },
 
@@ -117,7 +115,7 @@ export const apiService = {
         // const data = await fetchJson<StatisticCard[]>('/api/dashboard/statistics');
         // return data;
         await simulateNetworkDelay();
-        return Promise.resolve(mockStatistics); // ПОВЕРТАЄМО НОВІ ДАНІ
+        return Promise.resolve(mockStatistics); // WE ARE RETURNING NEW DATA
     },
 
     getRecentEvents: async (): Promise<RecentEvent[]> => {
@@ -241,7 +239,7 @@ export const apiService = {
     updateSettings: async (newSettings: Partial<SettingsData>): Promise<SettingsData> => {
         // return await fetchJson<SettingsData>('/api/settings', { method: 'PUT', body: JSON.stringify(newSettings) });
         await simulateNetworkDelay();
-        // У реальному житті тут буде оновлення даних
+        // In real life, there will be data updates here
         console.log('Mock: Updating settings', newSettings);
         return Promise.resolve({ ...mockSettings, ...newSettings });
     },

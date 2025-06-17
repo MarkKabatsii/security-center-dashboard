@@ -1,38 +1,37 @@
-// src/pages/client/HomePage.tsx
-import React, { useState } from 'react';
-import Select from '../../components/ui/Select'; // Шлях може відрізнятися
-import TextArea from '../../components/ui/TextArea'; // Шлях може відрізнятися
-import Button from '../../components/ui/Button'; // Шлях може відрізнятися
-import { useNavigate } from 'react-router-dom'; // Для перенаправлення на ResponseViewPage
+import React, {useState} from 'react';
+import Select from '../../components/ui/Select';
+import TextArea from '../../components/ui/TextArea';
+import Button from '../../components/ui/Button';
+import {useNavigate} from 'react-router-dom';
 
 const HomePage: React.FC = () => {
     const [selectedModel, setSelectedModel] = useState<string>('gpt4');
     const [prompt, setPrompt] = useState<string>('');
-    const [isLoading, setIsLoading] = useState<boolean>(false); // Для індикації завантаження
+    const [isLoading, setIsLoading] = useState<boolean>(false); // To indicate loading
     const navigate = useNavigate();
 
     const aiModels = [
-        { value: 'gpt4', label: 'OpenAI GPT-4' },
-        { value: 'gpt3.5', label: 'OpenAI GPT-3.5 Turbo' },
-        { value: 'claude', label: 'Anthropic Claude' },
-        { value: 'gemini', label: 'Google Gemini' },
+        {value: 'gpt4', label: 'OpenAI GPT-4'},
+        {value: 'gpt3.5', label: 'OpenAI GPT-3.5 Turbo'},
+        {value: 'claude', label: 'Anthropic Claude'},
+        {value: 'gemini', label: 'Google Gemini'},
     ];
 
     const handleSendPrompt = async () => {
         if (!prompt.trim()) {
-            alert('Prompt cannot be empty!'); // Можна замінити на більш красиві сповіщення
+            alert('Prompt cannot be empty!'); // Can be replaced with more beautiful notifications
             return;
         }
 
         setIsLoading(true);
-        // Тут буде логіка відправки запиту до вашого AI Gateway
-        // Замість реального API-запиту, імітуємо його затримкою
+        // Here will be the logic for sending a request to your AI Gateway
+        // Instead of a real API request, we simulate it with a delay
         try {
             console.log(`Sending prompt to ${selectedModel}: "${prompt}"`);
-            await new Promise(resolve => setTimeout(resolve, 2000)); // Імітація затримки API
+            await new Promise(resolve => setTimeout(resolve, 2000)); // API latency simulation
 
-            // Після отримання відповіді, перенаправляємо на ResponseViewPage
-            // Передаємо prompt та імітовану відповідь через стан роутера
+            // After receiving the response, redirect to ResponseViewPage
+            // We pass the prompt and simulated response through the router state
             navigate('/response-view', {
                 state: {
                     originalPrompt: prompt,
@@ -42,7 +41,7 @@ const HomePage: React.FC = () => {
             });
         } catch (error) {
             console.error("Error sending prompt:", error);
-            // У випадку помилки, можна перенаправити на сторінку з помилкою або показати сповіщення
+            // In case of an error, you can redirect to an error page or show a notification
             navigate('/blocked', {
                 state: {
                     reason: "Failed to process your request due to an internal error. Please try again later.",
@@ -54,11 +53,13 @@ const HomePage: React.FC = () => {
     };
 
     return (
-        <div className="bg-light-surface dark:bg-dark-surface p-8 rounded-lg shadow-xl text-light-text dark:text-dark-text max-w-3xl mx-auto my-8">
+        <div
+            className="bg-light-surface dark:bg-dark-surface p-8 rounded-lg shadow-xl text-light-text dark:text-dark-text max-w-3xl mx-auto my-8">
             <h1 className="text-2xl font-bold text-light-text dark:text-dark-text mb-6">AI Gateway Client Portal</h1>
 
             <div className="mb-6">
-                <label htmlFor="ai-model-select" className="block text-sm font-medium text-light-muted dark:text-dark-muted mb-2">
+                <label htmlFor="ai-model-select"
+                       className="block text-sm font-medium text-light-muted dark:text-dark-muted mb-2">
                     Select AI Model
                 </label>
                 <Select
@@ -70,23 +71,24 @@ const HomePage: React.FC = () => {
             </div>
 
             <div className="mb-6">
-                <label htmlFor="prompt-textarea" className="block text-sm font-medium text-light-muted dark:text-dark-muted mb-2">
+                <label htmlFor="prompt-textarea"
+                       className="block text-sm font-medium text-light-muted dark:text-dark-muted mb-2">
                     Type your prompt here...
                 </label>
                 <TextArea
                     id="prompt-textarea"
-                    rows={8} // Висота textarea
+                    rows={8}
                     placeholder="E.g., Analyze last month's sales data for key insights."
                     value={prompt}
                     onChange={(e) => setPrompt(e.target.value)}
-                    className="h-48" // Додаємо фіксовану висоту
+                    className="h-48"
                 />
             </div>
 
             <Button
                 onClick={handleSendPrompt}
                 disabled={isLoading}
-                variant="primary" // Використовуйте ваш акцентний колір
+                variant="primary"
                 className="w-full"
             >
                 {isLoading ? 'Sending...' : 'Send Prompt'}

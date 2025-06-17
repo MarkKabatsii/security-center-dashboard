@@ -1,6 +1,4 @@
-// src/components/ui/Table.tsx
-// import React, { useState, type ReactNode } from 'react';
-import React, { type ReactNode} from "react";
+import { type ReactNode} from "react";
 import classNames from 'classnames';
 import Button from './Button'; // Assuming Button component exists
 
@@ -15,8 +13,7 @@ import Button from './Button'; // Assuming Button component exists
  * Receives the full row object.
  * @property {string} [className] - Optional CSS class for the column header and cells.
  */
-// UA: Визначає структуру стовпця в компоненті Table.
-// EN: Defines the structure of a column in the Table component.
+// Defines the structure of a column in the Table component.
 export interface TableColumn<T> {
     key: keyof T | string;
     header: string;
@@ -42,8 +39,7 @@ export interface TableColumn<T> {
  * @property {string} [emptyMessage="No data available."] - Message to display when no data is present.
  * @property {boolean} [isLoading=false] - If true, displays a loading indicator.
  */
-// UA: Властивості компонента Table.
-// EN: Props for the Table component.
+// Props for the Table component.
 interface TableProps<T> {
     columns: TableColumn<T>[];
     data: T[];
@@ -65,8 +61,7 @@ interface TableProps<T> {
  * @template T - The type of data object for each row.
  * @param {TableProps<T>} props - The component's props.
  */
-// UA: Універсальний, багаторазовий компонент таблиці з можливостями сортування та пагінації.
-// EN: A generic, reusable table component with sorting and pagination capabilities.
+// A generic, reusable table component with sorting and pagination capabilities.
 function Table<T extends { id?: string | number }>({
                                                        columns,
                                                        data,

@@ -1,11 +1,10 @@
-// src/pages/client/ResponseViewPage.tsx
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom'; // Додано useParams
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Button from '../../components/ui/Button';
 import Badge from '../../components/ui/Badge';
-import mockHistoryData, { type HistoryEntry } from '../../data/historyData'; // Імпортуємо мокові дані історії
+import mockHistoryData, { type HistoryEntry } from '../../data/historyData';
 
-// Тип для стану, який може бути переданий через useLocation
+// Type for state that can be passed via useLocation
 interface LocationState {
     originalPrompt?: string;
     aiResponse?: string;
@@ -15,7 +14,7 @@ interface LocationState {
 const ResponseViewPage: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { id } = useParams<{ id: string }>(); // Отримуємо ID з URL-параметрів
+    const { id } = useParams<{ id: string }>(); // Getting the ID from URL parameters
     const [displayData, setDisplayData] = useState<HistoryEntry | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -25,27 +24,27 @@ const ResponseViewPage: React.FC = () => {
             setIsLoading(true);
             setError(null);
 
-            // Спроба отримати дані зі стану (для нових запитів)
+            // Attempt to retrieve data from state (for new requests)
             const state = location.state as LocationState;
             if (state?.originalPrompt && state?.aiResponse) {
-                // Якщо дані є в стані, використовуємо їх
+                // If the data is in a state, we use it
                 setDisplayData({
-                    id: 'new-response', // Для нових відповідей ID може бути тимчасовим
+                    id: 'new-response', // For new responses, the ID may be temporary
                     timestamp: new Date().toISOString(),
-                    type: 'New Prompt', // Або можна вивести 'Dynamic'
-                    promptSummary: state.originalPrompt.substring(0, 50) + '...', // Короткий опис
+                    type: 'New Prompt', // Or you can output 'Dynamic'
+                    promptSummary: state.originalPrompt.substring(0, 50) + '...',
                     originalPrompt: state.originalPrompt,
                     aiResponse: state.aiResponse,
                     modelUsed: state.modelUsed || 'Unknown Model',
-                    status: 'Success', // Припускаємо успіх, якщо є відповідь
+                    status: 'Success', // We assume success if there is an answer.
                 });
                 setIsLoading(false);
                 return;
             }
 
-            // Якщо ID є в URL (для записів історії)
+            // If the ID is in the URL (for history entries)
             if (id) {
-                // В реальному проекті тут буде API-запит
+                // In a real project, this would be an API request.
                 const foundEntry = mockHistoryData.find(entry => entry.id === id);
                 if (foundEntry) {
                     setDisplayData(foundEntry);
@@ -56,13 +55,13 @@ const ResponseViewPage: React.FC = () => {
                 return;
             }
 
-            // Якщо ні state, ні ID не були надані
+            // If neither state nor ID was provided
             setError('No response data or ID provided.');
             setIsLoading(false);
         };
 
         loadResponseData();
-    }, [location.state, id]); // Залежність від state та ID для перезавантаження
+    }, [location.state, id]); // Dependency on state and ID for reload
 
     if (isLoading) {
         return (
@@ -84,7 +83,7 @@ const ResponseViewPage: React.FC = () => {
         );
     }
 
-    // Якщо все добре, відображаємо дані
+    // If everything is fine, we display the data
     const { originalPrompt, aiResponse, modelUsed, status, statusReason, type, timestamp } = displayData;
 
     const getStatusBadgeVariant = (s: HistoryEntry['status']) => {
@@ -105,8 +104,8 @@ const ResponseViewPage: React.FC = () => {
         <div className="flex flex-col space-y-8 bg-light-bg dark:bg-dark-bg p-4 md:p-8">
             <h1 className="text-3xl font-bold text-light-text dark:text-dark-text mb-6">AI Response</h1>
 
-            {/* Додаткова інформація про запис історії */}
-            {id && ( // Показуємо цей блок тільки якщо це запис з історії (тобто є ID)
+            {/* Additional information about recording history */}
+            {id && ( // We only show this block if it is a history entry (i.e. there is an ID)
                 <div className="bg-light-surface dark:bg-dark-surface p-4 rounded-lg shadow-md border border-light-border dark:border-dark-border text-sm flex flex-col sm:flex-row justify-between items-start sm:items-center">
                     <div className="mb-2 sm:mb-0">
                         <span className="font-semibold text-light-text dark:text-dark-text mr-2">Type:</span>
@@ -124,7 +123,7 @@ const ResponseViewPage: React.FC = () => {
                 </div>
             )}
 
-            {/* Блок Original Prompt */}
+            {/* Block Original Prompt */}
             <div className="bg-light-surface dark:bg-dark-surface p-6 rounded-lg shadow-md border border-light-border dark:border-dark-border">
                 <h2 className="text-xl font-semibold text-light-text dark:text-dark-text mb-4">Original Prompt</h2>
                 <div className="bg-light-bg dark:bg-dark-bg p-4 rounded-md border border-light-border dark:border-dark-border text-light-text dark:text-dark-text whitespace-pre-wrap">
@@ -132,7 +131,7 @@ const ResponseViewPage: React.FC = () => {
                 </div>
             </div>
 
-            {/* Блок AI Response */}
+            {/* Block AI Response */}
             <div className="bg-light-surface dark:bg-dark-surface p-6 rounded-lg shadow-md border border-light-border dark:border-dark-border">
                 <h2 className="text-xl font-semibold text-light-text dark:text-dark-text mb-4">AI Response</h2>
                 <div className="bg-light-bg dark:bg-dark-bg p-4 rounded-md border border-light-border dark:border-dark-border text-light-text dark:text-dark-text whitespace-pre-wrap">
@@ -144,9 +143,9 @@ const ResponseViewPage: React.FC = () => {
                 </div>
             </div>
 
-            {/* Кнопки дій */}
+            {/* Action buttons */}
             <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-end mt-4">
-                {/* Кнопка "Save to History" має сенс лише для нових відповідей */}
+                {/* The "Save to History" button only makes sense for new replies */}
                 {!id && (
                     <Button
                         onClick={() => alert('This response has been saved to history!') /* simulate save */}

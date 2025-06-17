@@ -1,20 +1,16 @@
-// src/pages/Settings.tsx
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/ui/Card.tsx';
 import Button from '../../components/ui/Button.tsx';
 import Input from '../../components/ui/Input.tsx';
 import Modal from '../../components/ui/Modal.tsx';
 import { useData } from '../../contexts/DataContext.tsx';
-// import { SettingsData } from '../types'
 
 /**
  * @component Settings
  * @description Page for managing system settings, including API configuration,
  * alert configuration, and additional settings like language and timezone.
  */
-// UA: Сторінка для управління системними налаштуваннями, включаючи конфігурацію API,
-// конфігурацію сповіщень та додаткові налаштування, такі як мова та часовий пояс.
-// EN: Page for managing system settings, including API configuration,
+// Page for managing system settings, including API configuration,
 // alert configuration, and additional settings like language and timezone.
 const Settings: React.FC = () => {
     const { settings, isLoading, error, updateSettings } = useData();
@@ -50,8 +46,7 @@ const Settings: React.FC = () => {
      * @description Handles changes in API key input fields.
      * @param {React.ChangeEvent<HTMLInputElement>} e - The change event.
      */
-        // UA: Обробляє зміни в полях вводу ключів API.
-        // EN: Handles changes in API key input fields.
+        // Handles changes in API key input fields.
     const handleApiFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             const { name, value } = e.target;
             setApiForm(prev => ({ ...prev, [name]: value }));
@@ -62,8 +57,7 @@ const Settings: React.FC = () => {
      * @description Handles changes in alert configuration checkboxes.
      * @param {React.ChangeEvent<HTMLInputElement>} e - The change event.
      */
-        // UA: Обробляє зміни у прапорцях конфігурації сповіщень.
-        // EN: Handles changes in alert configuration checkboxes.
+        // Handles changes in alert configuration checkboxes.
     const handleAlertFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             const { name, checked } = e.target;
             setAlertForm(prev => ({ ...prev, [name]: checked }));
@@ -74,8 +68,7 @@ const Settings: React.FC = () => {
      * @description Handles changes in additional settings input/select fields.
      * @param {React.ChangeEvent<HTMLInputElement | HTMLSelectElement>} e - The change event.
      */
-        // UA: Обробляє зміни в полях вводу/вибору додаткових налаштувань.
-        // EN: Handles changes in additional settings input/select fields.
+        // Handles changes in additional settings input/select fields.
     const handleAdditionalFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
             const { name, value } = e.target;
             setAdditionalForm(prev => ({ ...prev, [name]: value }));
@@ -86,8 +79,7 @@ const Settings: React.FC = () => {
      * @description Saves the updated API key settings.
      * @param {React.FormEvent} e - The form submission event.
      */
-        // UA: Зберігає оновлені налаштування ключів API.
-        // EN: Saves the updated API key settings.
+        // Saves the updated API key settings.
     const handleSaveApiSettings = async (e: React.FormEvent) => {
             e.preventDefault();
             await updateSettings({ apiKeys: apiForm });
@@ -99,8 +91,7 @@ const Settings: React.FC = () => {
      * @description Saves the updated alert configuration settings.
      * @param {React.FormEvent} e - The form submission event.
      */
-        // UA: Зберігає оновлені налаштування конфігурації сповіщень.
-        // EN: Saves the updated alert configuration settings.
+        // Saves the updated alert configuration settings.
     const handleSaveAlertSettings = async (e: React.FormEvent) => {
             e.preventDefault();
             await updateSettings({ alertConfig: alertForm });
@@ -112,8 +103,7 @@ const Settings: React.FC = () => {
      * @description Saves the updated additional system settings.
      * @param {React.FormEvent} e - The form submission event.
      */
-        // UA: Зберігає оновлені додаткові системні налаштування.
-        // EN: Saves the updated additional system settings.
+        // Saves the updated additional system settings.
     const handleSaveAdditionalSettings = async (e: React.FormEvent) => {
             e.preventDefault();
             await updateSettings({additionalSettings : additionalForm });

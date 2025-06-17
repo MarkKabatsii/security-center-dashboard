@@ -1,4 +1,3 @@
-// src/components/ui/Button.tsx
 import React, { type ButtonHTMLAttributes } from 'react';
 import classNames from 'classnames';
 
@@ -26,10 +25,7 @@ const Button: React.FC<ButtonProps> = ({
                                            loading = false,
                                            className,
                                            disabled,
-                                           // Деструктуризуємо 'variant', 'size', 'fullWidth', 'loading' з 'rest'
-                                           // щоб вони не передавалися до нативного елемента button.
-                                           // 'rest' тепер міститиме лише стандартні HTML-атрибути.
-                                           ...rest // Цей 'rest' тепер БЕЗ 'variant', 'size', 'fullWidth', 'loading'
+                                           ...rest
                                        }) => {
     const baseStyles = 'font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-opacity-75 transition ease-in-out duration-150';
 
@@ -76,7 +72,7 @@ const Button: React.FC<ButtonProps> = ({
         <button
             className={buttonClasses}
             disabled={disabled || loading}
-            {...rest} // Тепер 'rest' містить лише валідні HTML-атрибути
+            {...rest}
         >
             {loading ? (
                 <svg className="animate-spin h-5 w-5 text-current mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

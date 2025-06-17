@@ -1,4 +1,3 @@
-// src/components/ui/Input.tsx
 import React, { type InputHTMLAttributes } from 'react';
 import classNames from 'classnames';
 
@@ -25,15 +24,13 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 const Input: React.FC<InputProps> = ({ label, error, className, labelClassName, ...rest }) => {
     const inputClasses = classNames(
         'block w-full px-3 py-2 border rounded-md shadow-sm',
-        // Використовуємо ваші кастомні кольори для фокусу
         'focus:outline-none focus:ring-2 focus:ring-light-accent dark:focus:ring-dark-accent',
-        'focus:border-light-accent dark:focus:border-dark-accent', // Додано для відповідності фокусу
-        // Використовуємо ваші кастомні кольори для фону, тексту та бордера
+        'focus:border-light-accent dark:focus:border-dark-accent',
         'bg-light-surface text-light-text',
         'dark:bg-dark-surface dark:text-dark-text',
         {
-            'border-light-border dark:border-dark-border': !error, // Бордер без помилки
-            'border-light-error dark:border-dark-error': error,    // Бордер при помилці
+            'border-light-border dark:border-dark-border': !error,
+            'border-light-error dark:border-dark-error': error,
         },
         className
     );
@@ -44,7 +41,6 @@ const Input: React.FC<InputProps> = ({ label, error, className, labelClassName, 
                 <label
                     htmlFor={rest.id}
                     className={classNames(
-                        // Використовуємо ваші кастомні кольори для лейбла (можливо, text або muted)
                         'block text-sm font-medium text-light-muted dark:text-dark-muted mb-1',
                         labelClassName
                     )}

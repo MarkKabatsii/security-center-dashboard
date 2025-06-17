@@ -1,4 +1,3 @@
-// src/components/layout/AdminHeader.tsx
 import React, {useState} from 'react';
 import classNames from 'classnames';
 import Button from '../../ui/Button.tsx';
@@ -10,8 +9,7 @@ interface AdminHeaderProps {
     isDarkMode: boolean;
 }
 
-// UA: Основний компонент заголовка, що містить інформацію про користувача, перемикач теми та випадаюче меню профілю.
-// EN: The main header component containing user information, theme toggle, and a profile dropdown.
+// The main header component containing user information, theme toggle, and a profile dropdown.
 const AdminHeader: React.FC<AdminHeaderProps> = ({toggleTheme, isDarkMode}) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     return (
@@ -33,10 +31,9 @@ const AdminHeader: React.FC<AdminHeaderProps> = ({toggleTheme, isDarkMode}) => {
                 </div>
             </Link>
 
-            {/* Пробіл для вирівнювання з правого краю */}
             <div className="flex-grow"></div>
 
-            {/* Кнопка перемикання теми */}
+            {/* Theme switch button */}
             <div className="flex items-center space-x-4">
                 <button
                     onClick={toggleTheme}
@@ -57,8 +54,7 @@ const AdminHeader: React.FC<AdminHeaderProps> = ({toggleTheme, isDarkMode}) => {
                     )}
                 </button>
 
-                {/* User Profile Dropdown - UA: Випадаюче меню профілю користувача */}
-                {/* EN: User Profile Dropdown */}
+                {/* User Profile Dropdown */}
                 <div className="relative">
                     <Button
                         variant="ghost"

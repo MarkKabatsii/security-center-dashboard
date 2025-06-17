@@ -1,4 +1,3 @@
-// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -9,8 +8,6 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Загальні кольори для вашої темної теми
-        // Світла тема (основна)
         light: {
           bg: '#ffffff',
           surface: '#f5f5f5',
@@ -24,7 +21,6 @@ export default {
           focus: '#d3e3fd',
           hover: '#e2e4e8',
         },
-        // Темна тема
         dark: {
           bg: '#121212',
           surface: '#1E1E1E',
@@ -34,10 +30,9 @@ export default {
           error: '#EF5350',
           success: '#66BB6A',
           border: '#2C2C2C',
-          warning: '#FFEB3B', // Жовтий для темної теми
+          warning: '#FFEB3B',
         },
       },
-      // Додайте тут налаштування шрифтів, якщо вони ще не були додані
       fontFamily: {
         sans: ['Poppins', ...require('tailwindcss/defaultTheme').fontFamily.sans],
       },

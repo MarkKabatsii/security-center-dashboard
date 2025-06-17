@@ -1,4 +1,3 @@
-// src/pages/LogViewer.tsx
 import React, {useState, useEffect, useCallback} from 'react';
 import Card from '../../components/ui/Card.tsx';
 import Input from '../../components/ui/Input.tsx';
@@ -12,9 +11,7 @@ import type {LogEntry} from '../../types';
  * @description Page for viewing and filtering system logs.
  * Includes a filter input and a paginated, sortable table of log entries.
  */
-// UA: Сторінка для перегляду та фільтрації системних логів.
-// Включає поле вводу для фільтра та таблицю записів логів з пагінацією та сортуванням.
-// EN: Page for viewing and filtering system logs.
+// Page for viewing and filtering system logs.
 // Includes a filter input and a paginated, sortable table of log entries.
 const LogViewer: React.FC = () => {
     const {logEntries, totalLogEntries, isLoading, error, fetchLogEntries} = useData();
@@ -45,8 +42,7 @@ const LogViewer: React.FC = () => {
      * @description Handles changes in the filter input field, resetting to the first page.
      * @param {React.ChangeEvent<HTMLInputElement>} e - The change event from the input.
      */
-        // UA: Обробляє зміни в полі вводу фільтра, скидаючи на першу сторінку.
-        // EN: Handles changes in the filter input field, resetting to the first page.
+        // Handles changes in the filter input field, resetting to the first page.
     const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             setFilter(e.target.value);
             setCurrentPage(1); // Reset to first page on filter change
@@ -58,8 +54,7 @@ const LogViewer: React.FC = () => {
      * @param {LogEntry['status']} status - The status of the log entry.
      * @returns {'success' | 'danger' | 'warning' | 'default'} The badge variant.
      */
-        // UA: Повертає відповідний варіант бейджа для статусу логу.
-        // EN: Returns the appropriate badge variant for a log status.
+        // Returns the appropriate badge variant for a log status.
     const getStatusBadgeVariant = (status: LogEntry['status']) => {
             switch (status) {
                 case 'Allowed':
@@ -72,9 +67,7 @@ const LogViewer: React.FC = () => {
                     return 'default';
             }
         };
-
-    // Define table columns - UA: Визначаємо колонки таблиці
-    // EN: Define table columns
+    // Define table columns
     const columns: TableColumn<LogEntry>[] = [
         {
             key: 'dateTime',

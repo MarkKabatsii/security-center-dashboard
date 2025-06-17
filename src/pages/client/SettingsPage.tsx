@@ -1,4 +1,3 @@
-// src/pages/client/SettingsPage.tsx
 import React from 'react';
 
 const SettingsPage: React.FC = () => {

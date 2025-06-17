@@ -1,4 +1,3 @@
-// src/components/ui/Modal.tsx
 import React, { type ReactNode, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
@@ -14,8 +13,7 @@ import Button from './Button';
  * @property {string} [className] - Additional CSS classes for the modal content area.
  * @property {string} [overlayClassName] - Additional CSS classes for the modal overlay.
  */
-// UA: Властивості компонента Modal.
-// EN: Props for the Modal component.
+// Props for the Modal component.
 interface ModalProps {
     isOpen: boolean;
     onClose: () => void;
@@ -31,9 +29,7 @@ interface ModalProps {
  * Handles opening, closing, and allows for custom content.
  * @param {ModalProps} props - The component's props.
  */
-// UA: Багаторазовий компонент модального вікна, який рендерить свій вміст у портал.
-// Обробляє відкриття, закриття та дозволяє користувацький вміст.
-// EN: A reusable modal component that renders its content into a portal.
+// A reusable modal component that renders its content into a portal.
 // Handles opening, closing, and allows for custom content.
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title, className, overlayClassName }) => {
     const modalRoot = document.getElementById('modal-root') || document.body;
@@ -54,8 +50,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title, classNa
         };
     }, [isOpen, onClose]);
 
-    // Click outside to close - UA: Закриття при кліку поза модальним вікном
-    // EN: Click outside to close
+    // Click outside to close
     const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
         if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
             onClose();

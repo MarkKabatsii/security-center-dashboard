@@ -1,4 +1,3 @@
-// src/components/layout/sidebar/SidebarFooter.tsx
 import React from 'react';
 
 const SidebarFooter: React.FC = () => {

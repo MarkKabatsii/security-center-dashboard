@@ -1,13 +1,10 @@
-// src/types/index.d.ts
-
 /**
  * @interface StatisticCard
  * @description Represents the structure for a statistic card displayed on the dashboard.
  * @property {string} title - The title of the statistic card (e.g., "Total Requests").
  * @property {number} value - The numerical value displayed on the card.
  */
-// UA: Інтерфейс для статистичної картки на панелі приладів.
-// EN: Interface for a statistic card on the dashboard.
+// Interface for a statistic card on the dashboard.
 export interface StatisticCard {
     title: string;
     value: number;
@@ -21,8 +18,7 @@ export interface StatisticCard {
  * @property {string} timestamp - The timestamp of the event.
  * @property {string} id - Unique identifier for the event (додано для кращого використання key)
  */
-// UA: Інтерфейс для останніх подій та сповіщень.
-// EN: Interface for recent events and alerts.
+// Interface for recent events and alerts.
 export interface RecentEvent {
     message: string;
     type: 'warning' | 'info' | 'error'; // <--- Оновлено: додано 'error'
@@ -39,8 +35,7 @@ export interface RecentEvent {
  * @property {string} request - The request or action performed.
  * @property {'Allowed' | 'Blocked' | 'Masked'} status - The status of the request.
  */
-// UA: Інтерфейс для одного запису в таблиці логів.
-// EN: Interface for a single entry in the log viewer table.
+// Interface for a single entry in the log viewer table.
 export interface LogEntry {
     id: string;
     dateTime: string;
@@ -58,8 +53,7 @@ export interface LogEntry {
  * @property {'Block' | 'Mask'} action - The action taken when the rule is triggered.
  * @property {boolean} enabled - Indicates if the rule is currently active.
  */
-// UA: Інтерфейс для одного правила безпеки.
-// EN: Interface for a single security rule.
+// Interface for a single security rule.
 export interface Rule {
     id: string;
     name: string;
@@ -77,8 +71,7 @@ export interface Rule {
  * @property {'Admin' | 'User'} role - The role of the user.
  * @property {'Active' | 'Inactive' | 'Pending'} status - The current status of the user account.
  */
-// UA: Інтерфейс для системного користувача.
-// EN: Interface for a system user.
+// Interface for a system user.
 export interface User {
     id: string;
     name: string;
@@ -95,8 +88,7 @@ export interface User {
  * @property {string} category - The category of the event (e.g., 'security', 'system').
  * @property {string} description - A brief description of the event.
  */
-// UA: Інтерфейс для загальної системної події, перейменовано з 'Event' для уникнення конфлікту.
-// EN: Interface for a generic system event, renamed from 'Event' to avoid avoidance of conflict.
+// Interface for a generic system event, renamed from 'Event' to avoid avoidance of conflict.
 export interface SystemEvent {
     id: string;
     timestamp: string;
@@ -110,8 +102,7 @@ export interface SystemEvent {
  * @property {string} openai - The OpenAI API key.
  * @property {string} googleGemini - The Google Gemini API key.
  */
-// UA: Інтерфейс для конфігурації ключів API.
-// EN: Interface for API key configuration.
+// Interface for API key configuration.
 export interface ApiKeys {
     openai: string;
     googleGemini: string;
@@ -124,8 +115,7 @@ export interface ApiKeys {
  * @property {boolean} webhookAlertsEnabled - True if webhook alerts are enabled.
  * @property {string[]} recipientEmails - List of email addresses to send notifications.
  */
-// UA: Інтерфейс для конфігурації сповіщень.
-// EN: Interface for alert notification configuration.
+// Interface for alert notification configuration.
 export interface AlertConfiguration {
     emailNotificationsEnabled: boolean;
     webhookAlertsEnabled: boolean;
@@ -139,8 +129,7 @@ export interface AlertConfiguration {
  * @property {string} timezone - The configured timezone.
  * @property {number} maxLogRetentionDays - Maximum number of days to retain logs.
  */
-// UA: Інтерфейс для додаткових налаштувань системи.
-// EN: Interface for additional system settings.
+// Interface for additional system settings.
 
 export interface AdditionalSettings {
     systemLanguage: string;
@@ -154,8 +143,7 @@ export interface AdditionalSettings {
  * @property {AlertConfiguration} alertConfig - Alert configuration settings.
  * @property {AdditionalSettings} additionalSettings - Additional system settings.
  */
-// UA: Інтерфейс для загальної структури даних налаштувань.
-// EN: Interface for overall settings data structure.
+// Interface for overall settings data structure.
 export interface SettingsData {
     apiKeys: ApiKeys;
     alertConfig: AlertConfig;
@@ -168,8 +156,7 @@ export interface SettingsData {
  * @description Type for the status of the proxy service.
  * @property {'ON' | 'OFF'} status - The current status of the proxy service.
  */
-// UA: Тип для статусу проксі-сервісу.
-// EN: Type for proxy service status.
+// Type for proxy service status.
 export type ProxyServiceStatus = 'ON' | 'OFF';
 /**
  * @interface PaginatedResponse
@@ -178,8 +165,7 @@ export type ProxyServiceStatus = 'ON' | 'OFF';
  * @property {T[]} data - An array of items of type T.
  * @property {number} total - The total number of items available (across all pages).
  */
-// UA: Загальний інтерфейс для пагінованої відповіді API.
-// EN: Generic interface for a paginated API response.
+// Generic interface for a paginated API response.
 export interface PaginatedResponse<T> {
     data: T[];
     total: number;

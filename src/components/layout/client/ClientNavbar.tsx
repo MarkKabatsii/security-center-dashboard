@@ -1,4 +1,3 @@
-// src/components/layout/ClientNavbar.tsx
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import Button from "../../ui/Button.tsx";
@@ -32,10 +31,9 @@ const ClientNavbar: React.FC<ClientNavbarProps> = ({toggleTheme, isDarkMode}) =>
                 </div>
             </Link>
 
-            {/* Пробіл для вирівнювання з правого краю */}
             <div className="flex-grow"></div>
 
-            {/* Кнопка перемикання теми */}
+            {/* Theme switch button */}
             <div className="flex items-center space-x-4">
                 <button
                     onClick={toggleTheme}
@@ -56,8 +54,7 @@ const ClientNavbar: React.FC<ClientNavbarProps> = ({toggleTheme, isDarkMode}) =>
                     )}
                 </button>
 
-                {/* User Profile Dropdown - UA: Випадаюче меню профілю користувача */}
-                {/* EN: User Profile Dropdown */}
+                {/* User Profile Dropdown */}
                 <div className="relative">
                     <Button
                         variant="ghost"

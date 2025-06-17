@@ -1,4 +1,3 @@
-// src/components/layout/ClientSidebar.tsx
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import classNames from 'classnames';
@@ -37,8 +36,7 @@ const ClientSidebar: React.FC<ClientSidebarProps> = ({ isSidebarOpen, toggleSide
         };
     }, [isSidebarOpen, isDesktop]);
 
-    // Фіксована ширина згорнутого сайдбару (як у Gemini)
-    const collapsedWidthClass = 'w-[72px]'; // Приблизно 48px кнопка + 24px padding = 72px
+    const collapsedWidthClass = 'w-[72px]'; // Approximately 48px button + 24px padding = 72px
     const expandedWidthClass = 'w-64'; // 256px
 
     return (
@@ -56,9 +54,9 @@ const ClientSidebar: React.FC<ClientSidebarProps> = ({ isSidebarOpen, toggleSide
                 }
             )}
         >
-            {/* Верхня секція: Гамбургер-меню та "New Chat" */}
+            {/* Top section: Hamburger menu and "New Chat" */}
             <div className="flex items-center mb-6 pl-4 pr-2 relative h-12"> {/* Додано relative для позиціонування */}
-                {/* Кнопка-гамбургер: завжди на фіксованій позиції */}
+                {/* Hamburger button: always in a fixed position */}
                 <button
                     onClick={toggleSidebar}
                     className="p-2 rounded-full text-light-text dark:text-dark-text hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-light-accent dark:focus:ring-dark-accent"
@@ -73,7 +71,7 @@ const ClientSidebar: React.FC<ClientSidebarProps> = ({ isSidebarOpen, toggleSide
                     </svg>
                 </button>
             </div>
-            <nav className="flex-grow"> {/* Зменшив space-y для більш компактного вигляду */}
+            <nav className="flex-grow">
                 <MainNavigation
                     isSidebarOpen={isSidebarOpen}
                     isDesktop={isDesktop}
